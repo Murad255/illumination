@@ -11,7 +11,9 @@ main.d main.o: .././main.cpp \
  d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
  d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././lib/PWM.h .././lib/ExternalInterupt.h .././lib/watcdog.h
+ .././lib/PWM.h .././lib/ExternalInterupt.h .././lib/watcdog.h \
+ .././lib/Smoother.h \
+ d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
 
 d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -42,3 +44,7 @@ d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\i
 .././lib/ExternalInterupt.h:
 
 .././lib/watcdog.h:
+
+.././lib/Smoother.h:
+
+d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
