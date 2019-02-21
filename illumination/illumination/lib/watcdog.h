@@ -10,7 +10,7 @@
 #ifndef WATCDOG_H_
 #define WATCDOG_H_
 #include <avr/io.h> 
-
+#include "PWM.h"
 volatile unsigned long int cikle;
 
 
@@ -31,6 +31,7 @@ volatile unsigned long int cikle;
 	ISR(WDT_vect)
 		{
 		cikle+=16;
+		//S_Change();
 		}
 		
 		unsigned long int getCicle(){

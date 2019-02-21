@@ -4,7 +4,6 @@
 #include "lib/PWM.h"
 #include "lib/ExternalInterupt.h"
 #include "lib/watcdog.h"
-#include "lib/Smoother.h"
 
 //
 //			-## ##- VCC
@@ -19,45 +18,9 @@
 	
 */	
 
-class LedS:public Smoother{
-	void Change(){
-		OCR0A=coint;
-	}
-	
-	
-	public :
-	void Up(){
-		if(i>4){
-			ledOff();
-			i=0;
-		}
-		else{
-			 On(++i);
-			 
-		}
-		return;
-	}
-	void On(byte bright=i){
-		f=1;
-		i=bright;
-		begin(bright*51-51,bright*51);
-		
-		while (CointNum())delay(1);
-	
-		return;
-	}
-	void Invert(){
-		
-		if(f==0)On();
-		else if(f==1)ledOff();
-		return;
-	}
-	};
-	
-LedS led;
 int main()
 {
-	//LedS led;
+	
 	wBegin();
 	PWMbegin();
 	ExIntBegin();
@@ -80,11 +43,11 @@ int main()
 			}
 			else if(n>1){
 				ledInvert();
-				delay(220);
+				//delay(220);
 				ledInvert();
-				delay(220);
+			//	delay(220);
 				ledInvert();
-				delay(220);
+			//	delay(220);
 				ledInvert();
 				//
 				while(1){
@@ -96,11 +59,11 @@ int main()
 					}
 				}
 				ledInvert();
-				delay(220);
+			//	delay(220);
 				ledInvert();
-				delay(220);
+			//	delay(220);
 				ledInvert();
-				delay(220);
+			//	delay(220);
 				ledInvert();
 				//
 			}
