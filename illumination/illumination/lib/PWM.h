@@ -11,8 +11,9 @@ typedef unsigned char byte;
 
 #ifndef PWM_H_
 #define PWM_H_
-#define DDR DDRB
-#define PORT PORTB
+
+#define DDR		DDRB
+#define PORT	PORTB
 #define PWM_PIN 0
 
 
@@ -23,11 +24,16 @@ void ledInvert();
 void PWMbegin();			
 void Up();					
 
+namespace privatePWM{
+	void setImputValue(unsigned char value);
+	byte getImputValue();
+}
+
 
 //##############################################################
 void Up(){
-	if(OCR0A==0xFF)ledOff();
-	else ledOn(OCR0A/51+1);
+	if(privatePWM::getImputValue()==0xFF)ledOn(1);
+	else ledOn(privatePWM::getImputValue()/51+1);
 	return;
 }
 
@@ -39,20 +45,30 @@ void PWMbegin(){
 	}
 	
 void ledOff(){
-	OCR0A=0;
+	privatePWM::setImputValue(0);
 	return;
 }
 
 void ledOn(byte bright){
 	 static byte n;
-		if (bright)OCR0A= n =(bright*51);
-		else  OCR0A=n;
+		if (bright)privatePWM::setImputValue(n =(bright*51));
+		else  privatePWM::setImputValue(n);
 	return;
 }
 
 void ledInvert(){
-	if(OCR0A)ledOff();
+	if(privatePWM::getImputValue())ledOff();
 	else ledOn();
 	return;
+}
+
+
+
+void privatePWM::setImputValue(byte value){
+	 OCR0A=255-value;
+}
+
+byte privatePWM::getImputValue(){
+	return 255-OCR0A;
 }
 #endif /* PWM_H_ */

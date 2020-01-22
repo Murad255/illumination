@@ -6,7 +6,7 @@
 #include "lib/watcdog.h"
 
 //
-//	RESET		-## ##- VCC
+//	RESET	-## ##- VCC
 //			-#####-			SCK
 //			-#####- BUTTON	MISO
 //		GND	-#####- LED		MOSI
@@ -30,7 +30,8 @@ int main()
 		delay(200);
 	}
 	ledOff();
-
+	
+/////////Start///////
 
 	while(1){
 		if(availableExInt()){
