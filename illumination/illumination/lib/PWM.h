@@ -7,6 +7,8 @@
  */ 
   #pragma once
 #include <avr/io.h>
+#include "watcdog.h"
+
 typedef unsigned char byte;
 
 #ifndef PWM_H_
@@ -17,58 +19,81 @@ typedef unsigned char byte;
 #define PWM_PIN 0
 
 
-							
-void ledOff();				
-void ledOn(byte bright=0);	
-void ledInvert();			
-void PWMbegin();			
-void Up();					
-
-namespace privatePWM{
+class Led
+{
+	byte brightness;
 	void setImputValue(unsigned char value);
 	byte getImputValue();
-}
+	
+	public:
+	void ledOff();
+	void ledOn(byte bright=0);	//задаёт яркость в 5 уровнях
+	void ledInvert();
+	void ledInvert(int changeTime);
+	void PWMbegin();			//инизиализация светодиода, сделует указать в начале
+	void Up();					//повысить яркость на уровень. если установлен 5 уровень, то установить 1
+};					
+
+
 
 
 //##############################################################
-void Up(){
-	if(privatePWM::getImputValue()==0xFF)ledOn(1);
-	else ledOn(privatePWM::getImputValue()/51+1);
+void Led::Up(){
+	if(getImputValue()==0xFF)ledOn(1);
+	else ledOn(getImputValue()/51+1);
 	return;
 }
 
-void PWMbegin(){
+void Led::PWMbegin(){
 	DDR |=1<<PWM_PIN;
 	MCUCR|=1<<PUD;
 	TCCR0A=0b10100011; //выбираем неинверсный режим шим для обоих светодиодов
 	TCCR0B=0b00000001;  //выбираем работу таймера без предделителя тактовой частоты
 	}
 	
-void ledOff(){
-	privatePWM::setImputValue(0);
+void Led::ledOff(){
+	setImputValue(0);
 	return;
 }
 
-void ledOn(byte bright){
-	 static byte n;
-		if (bright)privatePWM::setImputValue(n =(bright*51));
-		else  privatePWM::setImputValue(n);
+void Led::ledOn(byte bright){
+		if (bright)setImputValue(brightness =(bright*51));
+		else  setImputValue(brightness);
 	return;
 }
 
-void ledInvert(){
-	if(privatePWM::getImputValue())ledOff();
+void Led::ledInvert(){
+	if(getImputValue())ledOff();
 	else ledOn();
 	return;
 }
 
+void Led::ledInvert(int changeTime){
+	int n=changeTime/16;
+	n=brightness/n;
+	
+	if(getImputValue()) 
+	for(int i=changeTime/16; i>=0; i--){
+		setImputValue(i*n);
+		delay(16);
+	}
+	
+	else
+	for(int i=0; i<=changeTime/16; i++){
+		setImputValue(i*n);
+		delay(16);
+	}
+	
+	return;
+}
 
+/////////////////////////////////////////////
 
-void privatePWM::setImputValue(byte value){
+void Led::setImputValue(byte value){
 	 OCR0A=255-value;
 }
 
-byte privatePWM::getImputValue(){
+byte Led::getImputValue(){
 	return 255-OCR0A;
 }
 #endif /* PWM_H_ */

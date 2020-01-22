@@ -3,45 +3,45 @@ illumination.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000258  00000000  00000000  00000074  2**1
+  0 .text         00000390  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  000002cc  2**0
+  1 .data         00000000  00800060  00800060  00000404  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000006  00800060  00800060  000002cc  2**0
+  2 .bss          00000005  00800060  00800060  00000404  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000002cc  2**0
+  3 .comment      00000030  00000000  00000000  00000404  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002fc  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000434  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000a0  00000000  00000000  00000338  2**0
+  5 .debug_aranges 000000a8  00000000  00000000  00000470  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000a98  00000000  00000000  000003d8  2**0
+  6 .debug_info   00000e73  00000000  00000000  00000518  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000602  00000000  00000000  00000e70  2**0
+  7 .debug_abbrev 00000635  00000000  00000000  0000138b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000004b7  00000000  00000000  00001472  2**0
+  8 .debug_line   00000546  00000000  00000000  000019c0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000184  00000000  00000000  0000192c  2**2
+  9 .debug_frame  000001c4  00000000  00000000  00001f08  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000440  00000000  00000000  00001ab0  2**0
+ 10 .debug_str    0000046d  00000000  00000000  000020cc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000421  00000000  00000000  00001ef0  2**0
+ 11 .debug_loc    00000865  00000000  00000000  00002539  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000090  00000000  00000000  00002311  2**0
+ 12 .debug_ranges 000000b0  00000000  00000000  00002d9e  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	09 c0       	rjmp	.+18     	; 0x14 <__ctors_end>
-   2:	49 c0       	rjmp	.+146    	; 0x96 <__vector_1>
+   2:	e3 c0       	rjmp	.+454    	; 0x1ca <__vector_1>
    4:	15 c0       	rjmp	.+42     	; 0x30 <__bad_interrupt>
    6:	14 c0       	rjmp	.+40     	; 0x30 <__bad_interrupt>
    8:	13 c0       	rjmp	.+38     	; 0x30 <__bad_interrupt>
    a:	12 c0       	rjmp	.+36     	; 0x30 <__bad_interrupt>
    c:	11 c0       	rjmp	.+34     	; 0x30 <__bad_interrupt>
    e:	10 c0       	rjmp	.+32     	; 0x30 <__bad_interrupt>
-  10:	62 c0       	rjmp	.+196    	; 0xd6 <__vector_8>
+  10:	10 c0       	rjmp	.+32     	; 0x32 <__vector_8>
   12:	0e c0       	rjmp	.+28     	; 0x30 <__bad_interrupt>
 
 00000014 <__ctors_end>:
@@ -60,374 +60,563 @@ Disassembly of section .text:
   24:	1d 92       	st	X+, r1
 
 00000026 <.do_clear_bss_start>:
-  26:	a6 36       	cpi	r26, 0x66	; 102
+  26:	a5 36       	cpi	r26, 0x65	; 101
   28:	b2 07       	cpc	r27, r18
   2a:	e1 f7       	brne	.-8      	; 0x24 <.do_clear_bss_loop>
-  2c:	a1 d0       	rcall	.+322    	; 0x170 <main>
-  2e:	12 c1       	rjmp	.+548    	; 0x254 <_exit>
+  2c:	ee d0       	rcall	.+476    	; 0x20a <main>
+  2e:	ae c1       	rjmp	.+860    	; 0x38c <_exit>
 
 00000030 <__bad_interrupt>:
   30:	e7 cf       	rjmp	.-50     	; 0x0 <__vectors>
 
-00000032 <_Z8PWMbeginv>:
-			if (getCicle() - temp >= time)f1 = 1;
-			return 0;
-		}	
+00000032 <__vector_8>:
 	}
-	return 0;
-}
-  32:	b8 9a       	sbi	0x17, 0	; 23
-  34:	85 b7       	in	r24, 0x35	; 53
-  36:	80 64       	ori	r24, 0x40	; 64
-  38:	85 bf       	out	0x35, r24	; 53
-  3a:	83 ea       	ldi	r24, 0xA3	; 163
-  3c:	8f bd       	out	0x2f, r24	; 47
-  3e:	81 e0       	ldi	r24, 0x01	; 1
-  40:	83 bf       	out	0x33, r24	; 51
-  42:	08 95       	ret
+	byte readExInt(){
+		byte n=flag;
+		flag =0;
+		return n;
+	}
+  32:	1f 92       	push	r1
+  34:	0f 92       	push	r0
+  36:	0f b6       	in	r0, 0x3f	; 63
+  38:	0f 92       	push	r0
+  3a:	11 24       	eor	r1, r1
+  3c:	8f 93       	push	r24
+  3e:	9f 93       	push	r25
+  40:	af 93       	push	r26
+  42:	bf 93       	push	r27
+  44:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <cikle>
+  48:	90 91 62 00 	lds	r25, 0x0062	; 0x800062 <cikle+0x1>
+  4c:	a0 91 63 00 	lds	r26, 0x0063	; 0x800063 <cikle+0x2>
+  50:	b0 91 64 00 	lds	r27, 0x0064	; 0x800064 <cikle+0x3>
+  54:	40 96       	adiw	r24, 0x10	; 16
+  56:	a1 1d       	adc	r26, r1
+  58:	b1 1d       	adc	r27, r1
+  5a:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <cikle>
+  5e:	90 93 62 00 	sts	0x0062, r25	; 0x800062 <cikle+0x1>
+  62:	a0 93 63 00 	sts	0x0063, r26	; 0x800063 <cikle+0x2>
+  66:	b0 93 64 00 	sts	0x0064, r27	; 0x800064 <cikle+0x3>
+  6a:	bf 91       	pop	r27
+  6c:	af 91       	pop	r26
+  6e:	9f 91       	pop	r25
+  70:	8f 91       	pop	r24
+  72:	0f 90       	pop	r0
+  74:	0f be       	out	0x3f, r0	; 63
+  76:	0f 90       	pop	r0
+  78:	1f 90       	pop	r1
+  7a:	18 95       	reti
 
-00000044 <_Z5ledOnh>:
-  44:	88 23       	and	r24, r24
-  46:	61 f0       	breq	.+24     	; 0x60 <_Z5ledOnh+0x1c>
-  48:	98 2f       	mov	r25, r24
-  4a:	99 0f       	add	r25, r25
-  4c:	89 0f       	add	r24, r25
-  4e:	98 2f       	mov	r25, r24
-  50:	92 95       	swap	r25
-  52:	90 7f       	andi	r25, 0xF0	; 240
-  54:	89 0f       	add	r24, r25
-  56:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
-  5a:	80 95       	com	r24
-  5c:	86 bf       	out	0x36, r24	; 54
-  5e:	08 95       	ret
-  60:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
-  64:	80 95       	com	r24
-  66:	86 bf       	out	0x36, r24	; 54
-  68:	08 95       	ret
+0000007c <_Z6wBeginv>:
+  7c:	81 b5       	in	r24, 0x21	; 33
+  7e:	80 61       	ori	r24, 0x10	; 16
+  80:	81 bd       	out	0x21, r24	; 33
+  82:	81 b5       	in	r24, 0x21	; 33
+  84:	80 64       	ori	r24, 0x40	; 64
+  86:	81 bd       	out	0x21, r24	; 33
+  88:	78 94       	sei
+  8a:	08 95       	ret
 
-0000006a <_Z2Upv>:
-  6a:	86 b7       	in	r24, 0x36	; 54
-  6c:	81 11       	cpse	r24, r1
-  6e:	03 c0       	rjmp	.+6      	; 0x76 <_Z2Upv+0xc>
-  70:	81 e0       	ldi	r24, 0x01	; 1
-  72:	e8 df       	rcall	.-48     	; 0x44 <_Z5ledOnh>
-  74:	08 95       	ret
-  76:	86 b7       	in	r24, 0x36	; 54
-  78:	80 95       	com	r24
-  7a:	63 e3       	ldi	r22, 0x33	; 51
-  7c:	df d0       	rcall	.+446    	; 0x23c <__udivmodqi4>
-  7e:	8f 5f       	subi	r24, 0xFF	; 255
-  80:	e1 df       	rcall	.-62     	; 0x44 <_Z5ledOnh>
-  82:	08 95       	ret
+0000008c <_Z5delaym>:
+  8c:	0f 93       	push	r16
+  8e:	1f 93       	push	r17
+  90:	8b 01       	movw	r16, r22
+  92:	9c 01       	movw	r18, r24
+  94:	40 91 61 00 	lds	r20, 0x0061	; 0x800061 <cikle>
+  98:	50 91 62 00 	lds	r21, 0x0062	; 0x800062 <cikle+0x1>
+  9c:	60 91 63 00 	lds	r22, 0x0063	; 0x800063 <cikle+0x2>
+  a0:	70 91 64 00 	lds	r23, 0x0064	; 0x800064 <cikle+0x3>
+  a4:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <cikle>
+  a8:	90 91 62 00 	lds	r25, 0x0062	; 0x800062 <cikle+0x1>
+  ac:	a0 91 63 00 	lds	r26, 0x0063	; 0x800063 <cikle+0x2>
+  b0:	b0 91 64 00 	lds	r27, 0x0064	; 0x800064 <cikle+0x3>
+  b4:	84 1b       	sub	r24, r20
+  b6:	95 0b       	sbc	r25, r21
+  b8:	a6 0b       	sbc	r26, r22
+  ba:	b7 0b       	sbc	r27, r23
+  bc:	80 17       	cp	r24, r16
+  be:	91 07       	cpc	r25, r17
+  c0:	a2 07       	cpc	r26, r18
+  c2:	b3 07       	cpc	r27, r19
+  c4:	78 f3       	brcs	.-34     	; 0xa4 <__stack+0x5>
+  c6:	1f 91       	pop	r17
+  c8:	0f 91       	pop	r16
+  ca:	08 95       	ret
 
-00000084 <_Z9ledInvertv>:
-  84:	86 b7       	in	r24, 0x36	; 54
-  86:	8f 3f       	cpi	r24, 0xFF	; 255
-  88:	19 f0       	breq	.+6      	; 0x90 <_Z9ledInvertv+0xc>
-  8a:	8f ef       	ldi	r24, 0xFF	; 255
-  8c:	86 bf       	out	0x36, r24	; 54
-  8e:	08 95       	ret
-  90:	80 e0       	ldi	r24, 0x00	; 0
-  92:	d8 df       	rcall	.-80     	; 0x44 <_Z5ledOnh>
-  94:	08 95       	ret
+000000cc <_ZN3Led8PWMbeginEv>:
+  cc:	b8 9a       	sbi	0x17, 0	; 23
+  ce:	85 b7       	in	r24, 0x35	; 53
+  d0:	80 64       	ori	r24, 0x40	; 64
+  d2:	85 bf       	out	0x35, r24	; 53
+  d4:	83 ea       	ldi	r24, 0xA3	; 163
+  d6:	8f bd       	out	0x2f, r24	; 47
+  d8:	81 e0       	ldi	r24, 0x01	; 1
+  da:	83 bf       	out	0x33, r24	; 51
+  dc:	08 95       	ret
 
-00000096 <__vector_1>:
-  96:	1f 92       	push	r1
-  98:	0f 92       	push	r0
-  9a:	0f b6       	in	r0, 0x3f	; 63
-  9c:	0f 92       	push	r0
-  9e:	11 24       	eor	r1, r1
-  a0:	8f 93       	push	r24
-  a2:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <flag>
-  a6:	8f 5f       	subi	r24, 0xFF	; 255
-  a8:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <flag>
-  ac:	8f 91       	pop	r24
-  ae:	0f 90       	pop	r0
-  b0:	0f be       	out	0x3f, r0	; 63
-  b2:	0f 90       	pop	r0
-  b4:	1f 90       	pop	r1
-  b6:	18 95       	reti
+000000de <_ZN3Led5ledOnEh>:
+  de:	fc 01       	movw	r30, r24
+  e0:	66 23       	and	r22, r22
+  e2:	59 f0       	breq	.+22     	; 0xfa <_ZN3Led5ledOnEh+0x1c>
+  e4:	86 2f       	mov	r24, r22
+  e6:	88 0f       	add	r24, r24
+  e8:	68 0f       	add	r22, r24
+  ea:	96 2f       	mov	r25, r22
+  ec:	92 95       	swap	r25
+  ee:	90 7f       	andi	r25, 0xF0	; 240
+  f0:	69 0f       	add	r22, r25
+  f2:	60 83       	st	Z, r22
+  f4:	60 95       	com	r22
+  f6:	66 bf       	out	0x36, r22	; 54
+  f8:	08 95       	ret
+  fa:	80 81       	ld	r24, Z
+  fc:	80 95       	com	r24
+  fe:	86 bf       	out	0x36, r24	; 54
+ 100:	08 95       	ret
 
-000000b8 <_Z10ExIntBeginv>:
-  b8:	ba 98       	cbi	0x17, 2	; 23
-  ba:	c2 9a       	sbi	0x18, 2	; 24
-  bc:	83 e0       	ldi	r24, 0x03	; 3
-  be:	85 bf       	out	0x35, r24	; 53
-  c0:	80 e4       	ldi	r24, 0x40	; 64
-  c2:	8b bf       	out	0x3b, r24	; 59
-  c4:	78 94       	sei
-  c6:	08 95       	ret
+00000102 <_ZN3Led2UpEv>:
+ 102:	9c 01       	movw	r18, r24
+ 104:	86 b7       	in	r24, 0x36	; 54
+ 106:	81 11       	cpse	r24, r1
+ 108:	04 c0       	rjmp	.+8      	; 0x112 <_ZN3Led2UpEv+0x10>
+ 10a:	61 e0       	ldi	r22, 0x01	; 1
+ 10c:	c9 01       	movw	r24, r18
+ 10e:	e7 df       	rcall	.-50     	; 0xde <_ZN3Led5ledOnEh>
+ 110:	08 95       	ret
+ 112:	86 b7       	in	r24, 0x36	; 54
+ 114:	80 95       	com	r24
+ 116:	63 e3       	ldi	r22, 0x33	; 51
+ 118:	06 d1       	rcall	.+524    	; 0x326 <__udivmodqi4>
+ 11a:	61 e0       	ldi	r22, 0x01	; 1
+ 11c:	68 0f       	add	r22, r24
+ 11e:	c9 01       	movw	r24, r18
+ 120:	de df       	rcall	.-68     	; 0xde <_ZN3Led5ledOnEh>
+ 122:	08 95       	ret
 
-000000c8 <_Z14availableExIntv>:
-  c8:	90 91 65 00 	lds	r25, 0x0065	; 0x800065 <flag>
-  cc:	81 e0       	ldi	r24, 0x01	; 1
-  ce:	91 11       	cpse	r25, r1
-  d0:	01 c0       	rjmp	.+2      	; 0xd4 <_Z14availableExIntv+0xc>
-  d2:	80 e0       	ldi	r24, 0x00	; 0
-  d4:	08 95       	ret
-
-000000d6 <__vector_8>:
-  d6:	1f 92       	push	r1
-  d8:	0f 92       	push	r0
-  da:	0f b6       	in	r0, 0x3f	; 63
-  dc:	0f 92       	push	r0
-  de:	11 24       	eor	r1, r1
-  e0:	8f 93       	push	r24
-  e2:	9f 93       	push	r25
-  e4:	af 93       	push	r26
-  e6:	bf 93       	push	r27
-  e8:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <cikle>
-  ec:	90 91 62 00 	lds	r25, 0x0062	; 0x800062 <cikle+0x1>
-  f0:	a0 91 63 00 	lds	r26, 0x0063	; 0x800063 <cikle+0x2>
-  f4:	b0 91 64 00 	lds	r27, 0x0064	; 0x800064 <cikle+0x3>
-  f8:	40 96       	adiw	r24, 0x10	; 16
-  fa:	a1 1d       	adc	r26, r1
-  fc:	b1 1d       	adc	r27, r1
-  fe:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <cikle>
- 102:	90 93 62 00 	sts	0x0062, r25	; 0x800062 <cikle+0x1>
- 106:	a0 93 63 00 	sts	0x0063, r26	; 0x800063 <cikle+0x2>
- 10a:	b0 93 64 00 	sts	0x0064, r27	; 0x800064 <cikle+0x3>
- 10e:	bf 91       	pop	r27
- 110:	af 91       	pop	r26
- 112:	9f 91       	pop	r25
- 114:	8f 91       	pop	r24
- 116:	0f 90       	pop	r0
- 118:	0f be       	out	0x3f, r0	; 63
- 11a:	0f 90       	pop	r0
- 11c:	1f 90       	pop	r1
- 11e:	18 95       	reti
-
-00000120 <_Z6wBeginv>:
- 120:	81 b5       	in	r24, 0x21	; 33
- 122:	80 61       	ori	r24, 0x10	; 16
- 124:	81 bd       	out	0x21, r24	; 33
- 126:	81 b5       	in	r24, 0x21	; 33
- 128:	80 64       	ori	r24, 0x40	; 64
- 12a:	81 bd       	out	0x21, r24	; 33
- 12c:	78 94       	sei
+00000124 <_ZN3Led9ledInvertEv>:
+ 124:	26 b7       	in	r18, 0x36	; 54
+ 126:	2f 3f       	cpi	r18, 0xFF	; 255
+ 128:	19 f0       	breq	.+6      	; 0x130 <_ZN3Led9ledInvertEv+0xc>
+ 12a:	8f ef       	ldi	r24, 0xFF	; 255
+ 12c:	86 bf       	out	0x36, r24	; 54
  12e:	08 95       	ret
+ 130:	60 e0       	ldi	r22, 0x00	; 0
+ 132:	d5 df       	rcall	.-86     	; 0xde <_ZN3Led5ledOnEh>
+ 134:	08 95       	ret
 
-00000130 <_Z5delaym>:
- 130:	0f 93       	push	r16
- 132:	1f 93       	push	r17
- 134:	8b 01       	movw	r16, r22
- 136:	9c 01       	movw	r18, r24
- 138:	40 91 61 00 	lds	r20, 0x0061	; 0x800061 <cikle>
- 13c:	50 91 62 00 	lds	r21, 0x0062	; 0x800062 <cikle+0x1>
- 140:	60 91 63 00 	lds	r22, 0x0063	; 0x800063 <cikle+0x2>
- 144:	70 91 64 00 	lds	r23, 0x0064	; 0x800064 <cikle+0x3>
- 148:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <cikle>
- 14c:	90 91 62 00 	lds	r25, 0x0062	; 0x800062 <cikle+0x1>
- 150:	a0 91 63 00 	lds	r26, 0x0063	; 0x800063 <cikle+0x2>
- 154:	b0 91 64 00 	lds	r27, 0x0064	; 0x800064 <cikle+0x3>
- 158:	84 1b       	sub	r24, r20
- 15a:	95 0b       	sbc	r25, r21
- 15c:	a6 0b       	sbc	r26, r22
- 15e:	b7 0b       	sbc	r27, r23
- 160:	80 17       	cp	r24, r16
- 162:	91 07       	cpc	r25, r17
- 164:	a2 07       	cpc	r26, r18
- 166:	b3 07       	cpc	r27, r19
- 168:	78 f3       	brcs	.-34     	; 0x148 <_Z5delaym+0x18>
- 16a:	1f 91       	pop	r17
- 16c:	0f 91       	pop	r16
- 16e:	08 95       	ret
+00000136 <_ZN3Led9ledInvertEi>:
+ 136:	ef 92       	push	r14
+ 138:	ff 92       	push	r15
+ 13a:	0f 93       	push	r16
+ 13c:	1f 93       	push	r17
+ 13e:	cf 93       	push	r28
+ 140:	df 93       	push	r29
+ 142:	77 23       	and	r23, r23
+ 144:	14 f4       	brge	.+4      	; 0x14a <_ZN3Led9ledInvertEi+0x14>
+ 146:	61 5f       	subi	r22, 0xF1	; 241
+ 148:	7f 4f       	sbci	r23, 0xFF	; 255
+ 14a:	eb 01       	movw	r28, r22
+ 14c:	d5 95       	asr	r29
+ 14e:	c7 95       	ror	r28
+ 150:	d5 95       	asr	r29
+ 152:	c7 95       	ror	r28
+ 154:	d5 95       	asr	r29
+ 156:	c7 95       	ror	r28
+ 158:	d5 95       	asr	r29
+ 15a:	c7 95       	ror	r28
+ 15c:	fc 01       	movw	r30, r24
+ 15e:	80 81       	ld	r24, Z
+ 160:	90 e0       	ldi	r25, 0x00	; 0
+ 162:	be 01       	movw	r22, r28
+ 164:	ec d0       	rcall	.+472    	; 0x33e <__divmodhi4>
+ 166:	16 b7       	in	r17, 0x36	; 54
+ 168:	1f 3f       	cpi	r17, 0xFF	; 255
+ 16a:	19 f4       	brne	.+6      	; 0x172 <_ZN3Led9ledInvertEi+0x3c>
+ 16c:	dd 23       	and	r29, r29
+ 16e:	b4 f4       	brge	.+44     	; 0x19c <_ZN3Led9ledInvertEi+0x66>
+ 170:	25 c0       	rjmp	.+74     	; 0x1bc <_ZN3Led9ledInvertEi+0x86>
+ 172:	dd 23       	and	r29, r29
+ 174:	1c f1       	brlt	.+70     	; 0x1bc <_ZN3Led9ledInvertEi+0x86>
+ 176:	06 2f       	mov	r16, r22
+ 178:	86 2f       	mov	r24, r22
+ 17a:	6c 2f       	mov	r22, r28
+ 17c:	cb d0       	rcall	.+406    	; 0x314 <__mulqi3>
+ 17e:	18 2f       	mov	r17, r24
+ 180:	10 95       	com	r17
+ 182:	16 bf       	out	0x36, r17	; 54
+ 184:	60 e1       	ldi	r22, 0x10	; 16
+ 186:	70 e0       	ldi	r23, 0x00	; 0
+ 188:	80 e0       	ldi	r24, 0x00	; 0
+ 18a:	90 e0       	ldi	r25, 0x00	; 0
+ 18c:	7f df       	rcall	.-258    	; 0x8c <_Z5delaym>
+ 18e:	21 97       	sbiw	r28, 0x01	; 1
+ 190:	10 0f       	add	r17, r16
+ 192:	cf 3f       	cpi	r28, 0xFF	; 255
+ 194:	ff ef       	ldi	r31, 0xFF	; 255
+ 196:	df 07       	cpc	r29, r31
+ 198:	a1 f7       	brne	.-24     	; 0x182 <_ZN3Led9ledInvertEi+0x4c>
+ 19a:	10 c0       	rjmp	.+32     	; 0x1bc <_ZN3Led9ledInvertEi+0x86>
+ 19c:	06 2f       	mov	r16, r22
+ 19e:	e1 2c       	mov	r14, r1
+ 1a0:	f1 2c       	mov	r15, r1
+ 1a2:	16 bf       	out	0x36, r17	; 54
+ 1a4:	60 e1       	ldi	r22, 0x10	; 16
+ 1a6:	70 e0       	ldi	r23, 0x00	; 0
+ 1a8:	80 e0       	ldi	r24, 0x00	; 0
+ 1aa:	90 e0       	ldi	r25, 0x00	; 0
+ 1ac:	6f df       	rcall	.-290    	; 0x8c <_Z5delaym>
+ 1ae:	8f ef       	ldi	r24, 0xFF	; 255
+ 1b0:	e8 1a       	sub	r14, r24
+ 1b2:	f8 0a       	sbc	r15, r24
+ 1b4:	10 1b       	sub	r17, r16
+ 1b6:	ce 15       	cp	r28, r14
+ 1b8:	df 05       	cpc	r29, r15
+ 1ba:	9c f7       	brge	.-26     	; 0x1a2 <_ZN3Led9ledInvertEi+0x6c>
+ 1bc:	df 91       	pop	r29
+ 1be:	cf 91       	pop	r28
+ 1c0:	1f 91       	pop	r17
+ 1c2:	0f 91       	pop	r16
+ 1c4:	ff 90       	pop	r15
+ 1c6:	ef 90       	pop	r14
+ 1c8:	08 95       	ret
 
-00000170 <main>:
+000001ca <__vector_1>:
+ 1ca:	1f 92       	push	r1
+ 1cc:	0f 92       	push	r0
+ 1ce:	0f b6       	in	r0, 0x3f	; 63
+ 1d0:	0f 92       	push	r0
+ 1d2:	11 24       	eor	r1, r1
+ 1d4:	8f 93       	push	r24
+ 1d6:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1da:	8f 5f       	subi	r24, 0xFF	; 255
+ 1dc:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1e0:	8f 91       	pop	r24
+ 1e2:	0f 90       	pop	r0
+ 1e4:	0f be       	out	0x3f, r0	; 63
+ 1e6:	0f 90       	pop	r0
+ 1e8:	1f 90       	pop	r1
+ 1ea:	18 95       	reti
+
+000001ec <_Z10ExIntBeginv>:
+ 1ec:	ba 98       	cbi	0x17, 2	; 23
+ 1ee:	c2 9a       	sbi	0x18, 2	; 24
+ 1f0:	83 e0       	ldi	r24, 0x03	; 3
+ 1f2:	85 bf       	out	0x35, r24	; 53
+ 1f4:	80 e4       	ldi	r24, 0x40	; 64
+ 1f6:	8b bf       	out	0x3b, r24	; 59
+ 1f8:	78 94       	sei
+ 1fa:	08 95       	ret
+
+000001fc <_Z14availableExIntv>:
+	bool availableExInt(){
+		if(flag)return 1;
+ 1fc:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 200:	81 e0       	ldi	r24, 0x01	; 1
+ 202:	91 11       	cpse	r25, r1
+ 204:	01 c0       	rjmp	.+2      	; 0x208 <_Z14availableExIntv+0xc>
+ 206:	80 e0       	ldi	r24, 0x00	; 0
+		else return 0;
+ 208:	08 95       	ret
+
+0000020a <main>:
+	(переход на следующий уровень яркости при однократном 
 	нажатии). выход из режима настройки по двойному нажатию
 	
 */	
 int main()
 {
+ 20a:	cf 93       	push	r28
+ 20c:	df 93       	push	r29
+ 20e:	1f 92       	push	r1
+ 210:	cd b7       	in	r28, 0x3d	; 61
+ 212:	dd 27       	eor	r29, r29
+	Led led;
 	wBegin();
- 170:	d7 df       	rcall	.-82     	; 0x120 <_Z6wBeginv>
-	PWMbegin();
- 172:	5f df       	rcall	.-322    	; 0x32 <_Z8PWMbeginv>
+ 214:	33 df       	rcall	.-410    	; 0x7c <_Z6wBeginv>
+	led.PWMbegin();
+ 216:	ce 01       	movw	r24, r28
+ 218:	01 96       	adiw	r24, 0x01	; 1
+ 21a:	58 df       	rcall	.-336    	; 0xcc <_ZN3Led8PWMbeginEv>
 	ExIntBegin();
- 174:	a1 df       	rcall	.-190    	; 0xb8 <_Z10ExIntBeginv>
+ 21c:	e7 df       	rcall	.-50     	; 0x1ec <_Z10ExIntBeginv>
 }
 
+/////////////////////////////////////////////
 
-
-void privatePWM::setImputValue(byte value){
+void Led::setImputValue(byte value){
 	 OCR0A=255-value;
- 176:	8f ef       	ldi	r24, 0xFF	; 255
- 178:	86 bf       	out	0x36, r24	; 54
+ 21e:	8f ef       	ldi	r24, 0xFF	; 255
+ 220:	86 bf       	out	0x36, r24	; 54
 
-	ledOff();
+	led.ledOff();
 	delay(300);
- 17a:	6c e2       	ldi	r22, 0x2C	; 44
- 17c:	71 e0       	ldi	r23, 0x01	; 1
- 17e:	80 e0       	ldi	r24, 0x00	; 0
- 180:	90 e0       	ldi	r25, 0x00	; 0
- 182:	d6 df       	rcall	.-84     	; 0x130 <_Z5delaym>
- 184:	c0 e0       	ldi	r28, 0x00	; 0
+ 222:	6c e2       	ldi	r22, 0x2C	; 44
+ 224:	71 e0       	ldi	r23, 0x01	; 1
+ 226:	80 e0       	ldi	r24, 0x00	; 0
+ 228:	90 e0       	ldi	r25, 0x00	; 0
+ 22a:	30 df       	rcall	.-416    	; 0x8c <_Z5delaym>
+ 22c:	10 e0       	ldi	r17, 0x00	; 0
 	for(int n=0;n<6;n++){
-		ledOn(n);
- 186:	8c 2f       	mov	r24, r28
- 188:	5d df       	rcall	.-326    	; 0x44 <_Z5ledOnh>
+		led.ledOn(n);
+ 22e:	61 2f       	mov	r22, r17
+ 230:	ce 01       	movw	r24, r28
+ 232:	01 96       	adiw	r24, 0x01	; 1
+ 234:	54 df       	rcall	.-344    	; 0xde <_ZN3Led5ledOnEh>
 		delay(200);
- 18a:	68 ec       	ldi	r22, 0xC8	; 200
- 18c:	70 e0       	ldi	r23, 0x00	; 0
- 18e:	80 e0       	ldi	r24, 0x00	; 0
- 190:	90 e0       	ldi	r25, 0x00	; 0
- 192:	ce df       	rcall	.-100    	; 0x130 <_Z5delaym>
- 194:	cf 5f       	subi	r28, 0xFF	; 255
-	PWMbegin();
+ 236:	68 ec       	ldi	r22, 0xC8	; 200
+ 238:	70 e0       	ldi	r23, 0x00	; 0
+ 23a:	80 e0       	ldi	r24, 0x00	; 0
+ 23c:	90 e0       	ldi	r25, 0x00	; 0
+ 23e:	26 df       	rcall	.-436    	; 0x8c <_Z5delaym>
+ 240:	1f 5f       	subi	r17, 0xFF	; 255
+	led.PWMbegin();
 	ExIntBegin();
 
-	ledOff();
+	led.ledOff();
 	delay(300);
 	for(int n=0;n<6;n++){
- 196:	c6 30       	cpi	r28, 0x06	; 6
- 198:	b1 f7       	brne	.-20     	; 0x186 <main+0x16>
- 19a:	8f ef       	ldi	r24, 0xFF	; 255
- 19c:	86 bf       	out	0x36, r24	; 54
-	ledOff();
+ 242:	16 30       	cpi	r17, 0x06	; 6
+ 244:	a1 f7       	brne	.-24     	; 0x22e <main+0x24>
+ 246:	8f ef       	ldi	r24, 0xFF	; 255
+ 248:	86 bf       	out	0x36, r24	; 54
+	led.ledOff();
 	
 /////////Start///////
 
 	while(1){
 		if(availableExInt()){
- 19e:	94 df       	rcall	.-216    	; 0xc8 <_Z14availableExIntv>
- 1a0:	88 23       	and	r24, r24
- 1a2:	e9 f3       	breq	.-6      	; 0x19e <main+0x2e>
+ 24a:	d8 df       	rcall	.-80     	; 0x1fc <_Z14availableExIntv>
+ 24c:	88 23       	and	r24, r24
+ 24e:	e9 f3       	breq	.-6      	; 0x24a <main+0x40>
 			delay(220);
- 1a4:	6c ed       	ldi	r22, 0xDC	; 220
- 1a6:	70 e0       	ldi	r23, 0x00	; 0
- 1a8:	80 e0       	ldi	r24, 0x00	; 0
- 1aa:	90 e0       	ldi	r25, 0x00	; 0
- 1ac:	c1 df       	rcall	.-126    	; 0x130 <_Z5delaym>
+ 250:	6c ed       	ldi	r22, 0xDC	; 220
+ 252:	70 e0       	ldi	r23, 0x00	; 0
+ 254:	80 e0       	ldi	r24, 0x00	; 0
+ 256:	90 e0       	ldi	r25, 0x00	; 0
+ 258:	19 df       	rcall	.-462    	; 0x8c <_Z5delaym>
 		//EIMSK 
 		GIMSK= (1<<INT0);
 		sei();
 	}
 	byte readExInt(){
 		byte n=flag;
- 1ae:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <flag>
+ 25a:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
 		flag =0;
- 1b2:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <flag>
+ 25e:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
 			int n=(int)readExInt();
- 1b6:	90 e0       	ldi	r25, 0x00	; 0
+ 262:	90 e0       	ldi	r25, 0x00	; 0
+			
+			//однократное нажатие
 			if(n==1){
- 1b8:	81 30       	cpi	r24, 0x01	; 1
- 1ba:	91 05       	cpc	r25, r1
- 1bc:	11 f4       	brne	.+4      	; 0x1c2 <main+0x52>
-				ledInvert();
- 1be:	62 df       	rcall	.-316    	; 0x84 <_Z9ledInvertv>
- 1c0:	ee cf       	rjmp	.-36     	; 0x19e <main+0x2e>
+ 264:	81 30       	cpi	r24, 0x01	; 1
+ 266:	91 05       	cpc	r25, r1
+ 268:	31 f4       	brne	.+12     	; 0x276 <main+0x6c>
+				led.ledInvert(800);
+ 26a:	60 e2       	ldi	r22, 0x20	; 32
+ 26c:	73 e0       	ldi	r23, 0x03	; 3
+ 26e:	ce 01       	movw	r24, r28
+ 270:	01 96       	adiw	r24, 0x01	; 1
+ 272:	61 df       	rcall	.-318    	; 0x136 <_ZN3Led9ledInvertEi>
+ 274:	ea cf       	rjmp	.-44     	; 0x24a <main+0x40>
 			}
+			
+			//при нескольких нажатиях сразу
 			else if(n>1){
- 1c2:	02 97       	sbiw	r24, 0x02	; 2
- 1c4:	64 f3       	brlt	.-40     	; 0x19e <main+0x2e>
-				ledInvert();
- 1c6:	5e df       	rcall	.-324    	; 0x84 <_Z9ledInvertv>
+ 276:	02 97       	sbiw	r24, 0x02	; 2
+ 278:	44 f3       	brlt	.-48     	; 0x24a <main+0x40>
+				led.ledInvert();
+ 27a:	ce 01       	movw	r24, r28
+ 27c:	01 96       	adiw	r24, 0x01	; 1
+ 27e:	52 df       	rcall	.-348    	; 0x124 <_ZN3Led9ledInvertEv>
 				delay(220);
- 1c8:	6c ed       	ldi	r22, 0xDC	; 220
- 1ca:	70 e0       	ldi	r23, 0x00	; 0
- 1cc:	80 e0       	ldi	r24, 0x00	; 0
- 1ce:	90 e0       	ldi	r25, 0x00	; 0
- 1d0:	af df       	rcall	.-162    	; 0x130 <_Z5delaym>
-				ledInvert();
- 1d2:	58 df       	rcall	.-336    	; 0x84 <_Z9ledInvertv>
+ 280:	6c ed       	ldi	r22, 0xDC	; 220
+ 282:	70 e0       	ldi	r23, 0x00	; 0
+ 284:	80 e0       	ldi	r24, 0x00	; 0
+ 286:	90 e0       	ldi	r25, 0x00	; 0
+ 288:	01 df       	rcall	.-510    	; 0x8c <_Z5delaym>
+				led.ledInvert();
+ 28a:	ce 01       	movw	r24, r28
+ 28c:	01 96       	adiw	r24, 0x01	; 1
+ 28e:	4a df       	rcall	.-364    	; 0x124 <_ZN3Led9ledInvertEv>
 				delay(220);
- 1d4:	6c ed       	ldi	r22, 0xDC	; 220
- 1d6:	70 e0       	ldi	r23, 0x00	; 0
- 1d8:	80 e0       	ldi	r24, 0x00	; 0
- 1da:	90 e0       	ldi	r25, 0x00	; 0
- 1dc:	a9 df       	rcall	.-174    	; 0x130 <_Z5delaym>
-				ledInvert();
- 1de:	52 df       	rcall	.-348    	; 0x84 <_Z9ledInvertv>
+ 290:	6c ed       	ldi	r22, 0xDC	; 220
+ 292:	70 e0       	ldi	r23, 0x00	; 0
+ 294:	80 e0       	ldi	r24, 0x00	; 0
+ 296:	90 e0       	ldi	r25, 0x00	; 0
+ 298:	f9 de       	rcall	.-526    	; 0x8c <_Z5delaym>
+				led.ledInvert();
+ 29a:	ce 01       	movw	r24, r28
+ 29c:	01 96       	adiw	r24, 0x01	; 1
+ 29e:	42 df       	rcall	.-380    	; 0x124 <_ZN3Led9ledInvertEv>
 				delay(220);
- 1e0:	6c ed       	ldi	r22, 0xDC	; 220
- 1e2:	70 e0       	ldi	r23, 0x00	; 0
- 1e4:	80 e0       	ldi	r24, 0x00	; 0
- 1e6:	90 e0       	ldi	r25, 0x00	; 0
- 1e8:	a3 df       	rcall	.-186    	; 0x130 <_Z5delaym>
-				ledInvert();
- 1ea:	4c df       	rcall	.-360    	; 0x84 <_Z9ledInvertv>
+ 2a0:	6c ed       	ldi	r22, 0xDC	; 220
+ 2a2:	70 e0       	ldi	r23, 0x00	; 0
+ 2a4:	80 e0       	ldi	r24, 0x00	; 0
+ 2a6:	90 e0       	ldi	r25, 0x00	; 0
+ 2a8:	f1 de       	rcall	.-542    	; 0x8c <_Z5delaym>
+				led.ledInvert();
+ 2aa:	ce 01       	movw	r24, r28
+ 2ac:	01 96       	adiw	r24, 0x01	; 1
+ 2ae:	3a df       	rcall	.-396    	; 0x124 <_ZN3Led9ledInvertEv>
 				//
 				while(1){
 					if(availableExInt()){
- 1ec:	6d df       	rcall	.-294    	; 0xc8 <_Z14availableExIntv>
- 1ee:	88 23       	and	r24, r24
- 1f0:	e9 f3       	breq	.-6      	; 0x1ec <main+0x7c>
+ 2b0:	a5 df       	rcall	.-182    	; 0x1fc <_Z14availableExIntv>
+ 2b2:	88 23       	and	r24, r24
+ 2b4:	e9 f3       	breq	.-6      	; 0x2b0 <main+0xa6>
 						delay(220);
- 1f2:	6c ed       	ldi	r22, 0xDC	; 220
- 1f4:	70 e0       	ldi	r23, 0x00	; 0
- 1f6:	80 e0       	ldi	r24, 0x00	; 0
- 1f8:	90 e0       	ldi	r25, 0x00	; 0
- 1fa:	9a df       	rcall	.-204    	; 0x130 <_Z5delaym>
+ 2b6:	6c ed       	ldi	r22, 0xDC	; 220
+ 2b8:	70 e0       	ldi	r23, 0x00	; 0
+ 2ba:	80 e0       	ldi	r24, 0x00	; 0
+ 2bc:	90 e0       	ldi	r25, 0x00	; 0
+ 2be:	e6 de       	rcall	.-564    	; 0x8c <_Z5delaym>
 		//EIMSK 
 		GIMSK= (1<<INT0);
 		sei();
 	}
 	byte readExInt(){
 		byte n=flag;
- 1fc:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <flag>
+ 2c0:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
 		flag =0;
- 200:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <flag>
+ 2c4:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
 						int l=(int)readExInt();
- 204:	90 e0       	ldi	r25, 0x00	; 0
-						if(l==1)Up();
- 206:	81 30       	cpi	r24, 0x01	; 1
- 208:	91 05       	cpc	r25, r1
- 20a:	11 f4       	brne	.+4      	; 0x210 <main+0xa0>
- 20c:	2e df       	rcall	.-420    	; 0x6a <_Z2Upv>
- 20e:	ee cf       	rjmp	.-36     	; 0x1ec <main+0x7c>
+ 2c8:	90 e0       	ldi	r25, 0x00	; 0
+						if(l==1)led.Up();
+ 2ca:	81 30       	cpi	r24, 0x01	; 1
+ 2cc:	91 05       	cpc	r25, r1
+ 2ce:	21 f4       	brne	.+8      	; 0x2d8 <main+0xce>
+ 2d0:	ce 01       	movw	r24, r28
+ 2d2:	01 96       	adiw	r24, 0x01	; 1
+ 2d4:	16 df       	rcall	.-468    	; 0x102 <_ZN3Led2UpEv>
+ 2d6:	ec cf       	rjmp	.-40     	; 0x2b0 <main+0xa6>
 						else if(l>1)break;
- 210:	02 97       	sbiw	r24, 0x02	; 2
- 212:	64 f3       	brlt	.-40     	; 0x1ec <main+0x7c>
+ 2d8:	02 97       	sbiw	r24, 0x02	; 2
+ 2da:	54 f3       	brlt	.-44     	; 0x2b0 <main+0xa6>
 					}
 				}
-				ledInvert();
- 214:	37 df       	rcall	.-402    	; 0x84 <_Z9ledInvertv>
+				led.ledInvert();
+ 2dc:	ce 01       	movw	r24, r28
+ 2de:	01 96       	adiw	r24, 0x01	; 1
+ 2e0:	21 df       	rcall	.-446    	; 0x124 <_ZN3Led9ledInvertEv>
 				delay(220);
- 216:	6c ed       	ldi	r22, 0xDC	; 220
- 218:	70 e0       	ldi	r23, 0x00	; 0
- 21a:	80 e0       	ldi	r24, 0x00	; 0
- 21c:	90 e0       	ldi	r25, 0x00	; 0
- 21e:	88 df       	rcall	.-240    	; 0x130 <_Z5delaym>
-				ledInvert();
- 220:	31 df       	rcall	.-414    	; 0x84 <_Z9ledInvertv>
+ 2e2:	6c ed       	ldi	r22, 0xDC	; 220
+ 2e4:	70 e0       	ldi	r23, 0x00	; 0
+ 2e6:	80 e0       	ldi	r24, 0x00	; 0
+ 2e8:	90 e0       	ldi	r25, 0x00	; 0
+ 2ea:	d0 de       	rcall	.-608    	; 0x8c <_Z5delaym>
+				led.ledInvert();
+ 2ec:	ce 01       	movw	r24, r28
+ 2ee:	01 96       	adiw	r24, 0x01	; 1
+ 2f0:	19 df       	rcall	.-462    	; 0x124 <_ZN3Led9ledInvertEv>
 				delay(220);
- 222:	6c ed       	ldi	r22, 0xDC	; 220
- 224:	70 e0       	ldi	r23, 0x00	; 0
- 226:	80 e0       	ldi	r24, 0x00	; 0
- 228:	90 e0       	ldi	r25, 0x00	; 0
- 22a:	82 df       	rcall	.-252    	; 0x130 <_Z5delaym>
-				ledInvert();
- 22c:	2b df       	rcall	.-426    	; 0x84 <_Z9ledInvertv>
+ 2f2:	6c ed       	ldi	r22, 0xDC	; 220
+ 2f4:	70 e0       	ldi	r23, 0x00	; 0
+ 2f6:	80 e0       	ldi	r24, 0x00	; 0
+ 2f8:	90 e0       	ldi	r25, 0x00	; 0
+ 2fa:	c8 de       	rcall	.-624    	; 0x8c <_Z5delaym>
+				led.ledInvert();
+ 2fc:	ce 01       	movw	r24, r28
+ 2fe:	01 96       	adiw	r24, 0x01	; 1
+ 300:	11 df       	rcall	.-478    	; 0x124 <_ZN3Led9ledInvertEv>
 				delay(220);
- 22e:	6c ed       	ldi	r22, 0xDC	; 220
- 230:	70 e0       	ldi	r23, 0x00	; 0
- 232:	80 e0       	ldi	r24, 0x00	; 0
- 234:	90 e0       	ldi	r25, 0x00	; 0
- 236:	7c df       	rcall	.-264    	; 0x130 <_Z5delaym>
-				ledInvert();
- 238:	25 df       	rcall	.-438    	; 0x84 <_Z9ledInvertv>
- 23a:	b1 cf       	rjmp	.-158    	; 0x19e <main+0x2e>
+ 302:	6c ed       	ldi	r22, 0xDC	; 220
+ 304:	70 e0       	ldi	r23, 0x00	; 0
+ 306:	80 e0       	ldi	r24, 0x00	; 0
+ 308:	90 e0       	ldi	r25, 0x00	; 0
+ 30a:	c0 de       	rcall	.-640    	; 0x8c <_Z5delaym>
+				led.ledInvert();
+ 30c:	ce 01       	movw	r24, r28
+ 30e:	01 96       	adiw	r24, 0x01	; 1
+ 310:	09 df       	rcall	.-494    	; 0x124 <_ZN3Led9ledInvertEv>
+ 312:	9b cf       	rjmp	.-202    	; 0x24a <main+0x40>
 
-0000023c <__udivmodqi4>:
- 23c:	99 1b       	sub	r25, r25
- 23e:	79 e0       	ldi	r23, 0x09	; 9
- 240:	04 c0       	rjmp	.+8      	; 0x24a <__udivmodqi4_ep>
+00000314 <__mulqi3>:
+ 314:	00 24       	eor	r0, r0
 
-00000242 <__udivmodqi4_loop>:
- 242:	99 1f       	adc	r25, r25
- 244:	96 17       	cp	r25, r22
- 246:	08 f0       	brcs	.+2      	; 0x24a <__udivmodqi4_ep>
- 248:	96 1b       	sub	r25, r22
+00000316 <__mulqi3_loop>:
+ 316:	80 fd       	sbrc	r24, 0
+ 318:	06 0e       	add	r0, r22
+ 31a:	66 0f       	add	r22, r22
+ 31c:	11 f0       	breq	.+4      	; 0x322 <__mulqi3_exit>
+ 31e:	86 95       	lsr	r24
+ 320:	d1 f7       	brne	.-12     	; 0x316 <__mulqi3_loop>
 
-0000024a <__udivmodqi4_ep>:
- 24a:	88 1f       	adc	r24, r24
- 24c:	7a 95       	dec	r23
- 24e:	c9 f7       	brne	.-14     	; 0x242 <__udivmodqi4_loop>
- 250:	80 95       	com	r24
- 252:	08 95       	ret
+00000322 <__mulqi3_exit>:
+ 322:	80 2d       	mov	r24, r0
+ 324:	08 95       	ret
 
-00000254 <_exit>:
- 254:	f8 94       	cli
+00000326 <__udivmodqi4>:
+ 326:	99 1b       	sub	r25, r25
+ 328:	79 e0       	ldi	r23, 0x09	; 9
+ 32a:	04 c0       	rjmp	.+8      	; 0x334 <__udivmodqi4_ep>
 
-00000256 <__stop_program>:
- 256:	ff cf       	rjmp	.-2      	; 0x256 <__stop_program>
+0000032c <__udivmodqi4_loop>:
+ 32c:	99 1f       	adc	r25, r25
+ 32e:	96 17       	cp	r25, r22
+ 330:	08 f0       	brcs	.+2      	; 0x334 <__udivmodqi4_ep>
+ 332:	96 1b       	sub	r25, r22
+
+00000334 <__udivmodqi4_ep>:
+ 334:	88 1f       	adc	r24, r24
+ 336:	7a 95       	dec	r23
+ 338:	c9 f7       	brne	.-14     	; 0x32c <__udivmodqi4_loop>
+ 33a:	80 95       	com	r24
+ 33c:	08 95       	ret
+
+0000033e <__divmodhi4>:
+ 33e:	97 fb       	bst	r25, 7
+ 340:	07 2e       	mov	r0, r23
+ 342:	16 f4       	brtc	.+4      	; 0x348 <__divmodhi4+0xa>
+ 344:	00 94       	com	r0
+ 346:	06 d0       	rcall	.+12     	; 0x354 <__divmodhi4_neg1>
+ 348:	77 fd       	sbrc	r23, 7
+ 34a:	08 d0       	rcall	.+16     	; 0x35c <__divmodhi4_neg2>
+ 34c:	0b d0       	rcall	.+22     	; 0x364 <__udivmodhi4>
+ 34e:	07 fc       	sbrc	r0, 7
+ 350:	05 d0       	rcall	.+10     	; 0x35c <__divmodhi4_neg2>
+ 352:	3e f4       	brtc	.+14     	; 0x362 <__divmodhi4_exit>
+
+00000354 <__divmodhi4_neg1>:
+ 354:	90 95       	com	r25
+ 356:	81 95       	neg	r24
+ 358:	9f 4f       	sbci	r25, 0xFF	; 255
+ 35a:	08 95       	ret
+
+0000035c <__divmodhi4_neg2>:
+ 35c:	70 95       	com	r23
+ 35e:	61 95       	neg	r22
+ 360:	7f 4f       	sbci	r23, 0xFF	; 255
+
+00000362 <__divmodhi4_exit>:
+ 362:	08 95       	ret
+
+00000364 <__udivmodhi4>:
+ 364:	aa 1b       	sub	r26, r26
+ 366:	bb 1b       	sub	r27, r27
+ 368:	51 e1       	ldi	r21, 0x11	; 17
+ 36a:	07 c0       	rjmp	.+14     	; 0x37a <__udivmodhi4_ep>
+
+0000036c <__udivmodhi4_loop>:
+ 36c:	aa 1f       	adc	r26, r26
+ 36e:	bb 1f       	adc	r27, r27
+ 370:	a6 17       	cp	r26, r22
+ 372:	b7 07       	cpc	r27, r23
+ 374:	10 f0       	brcs	.+4      	; 0x37a <__udivmodhi4_ep>
+ 376:	a6 1b       	sub	r26, r22
+ 378:	b7 0b       	sbc	r27, r23
+
+0000037a <__udivmodhi4_ep>:
+ 37a:	88 1f       	adc	r24, r24
+ 37c:	99 1f       	adc	r25, r25
+ 37e:	5a 95       	dec	r21
+ 380:	a9 f7       	brne	.-22     	; 0x36c <__udivmodhi4_loop>
+ 382:	80 95       	com	r24
+ 384:	90 95       	com	r25
+ 386:	bc 01       	movw	r22, r24
+ 388:	cd 01       	movw	r24, r26
+ 38a:	08 95       	ret
+
+0000038c <_exit>:
+ 38c:	f8 94       	cli
+
+0000038e <__stop_program>:
+ 38e:	ff cf       	rjmp	.-2      	; 0x38e <__stop_program>

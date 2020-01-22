@@ -19,17 +19,18 @@
 */	
 int main()
 {
+	Led led; 
 	wBegin();
-	PWMbegin();
+	led.PWMbegin();
 	ExIntBegin();
 
-	ledOff();
+	led.ledOff();
 	delay(300);
 	for(int n=0;n<6;n++){
-		ledOn(n);
+		led.ledOn(n);
 		delay(200);
 	}
-	ledOff();
+	led.ledOff();
 	
 /////////Start///////
 
@@ -37,33 +38,37 @@ int main()
 		if(availableExInt()){
 			delay(220);
 			int n=(int)readExInt();
+			
+			//однократное нажатие
 			if(n==1){
-				ledInvert();
+				led.ledInvert(800);
 			}
+			
+			//при нескольких нажатиях сразу
 			else if(n>1){
-				ledInvert();
+				led.ledInvert();
 				delay(220);
-				ledInvert();
+				led.ledInvert();
 				delay(220);
-				ledInvert();
+				led.ledInvert();
 				delay(220);
-				ledInvert();
+				led.ledInvert();
 				//
 				while(1){
 					if(availableExInt()){
 						delay(220);
 						int l=(int)readExInt();
-						if(l==1)Up();
+						if(l==1)led.Up();
 						else if(l>1)break;
 					}
 				}
-				ledInvert();
+				led.ledInvert();
 				delay(220);
-				ledInvert();
+				led.ledInvert();
 				delay(220);
-				ledInvert();
+				led.ledInvert();
 				delay(220);
-				ledInvert();
+				led.ledInvert();
 				//
 			}
 		}
