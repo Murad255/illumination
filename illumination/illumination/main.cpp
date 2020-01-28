@@ -1,6 +1,6 @@
 #define F_CPU 120000UL
+#define  ATTINY
 #include <avr/io.h>
-#include <avr/interrupt.h>
 #include "lib/PWM.h"
 #include "lib/ExternalInterupt.h"
 #include "lib/watcdog.h"
@@ -21,7 +21,6 @@ int main()
 {
 	Led led; 
 	wBegin();
-	led.PWMbegin();
 	ExIntBegin();
 
 	led.ledOff();
@@ -30,8 +29,14 @@ int main()
 		led.ledOn(n);
 		delay(200);
 	}
+		for(int n=5;n>=0;n--){
+			led.ledOn(n);
+			delay(200);
+		}
 	led.ledOff();
-	
+
+
+
 /////////Start///////
 
 	while(1){

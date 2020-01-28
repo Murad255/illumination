@@ -30,7 +30,7 @@ class Led
 	void ledOn(byte bright=0);	//задаёт яркость в 5 уровнях
 	void ledInvert();
 	void ledInvert(int changeTime);
-	void PWMbegin();			//инизиализация светодиода, сделует указать в начале
+	Led();						//инизиализация светодиода, сделует указать в начале
 	void Up();					//повысить яркость на уровень. если установлен 5 уровень, то установить 1
 };					
 
@@ -44,10 +44,10 @@ void Led::Up(){
 	return;
 }
 
-void Led::PWMbegin(){
-	DDR |=1<<PWM_PIN;
+ Led::Led(){
+	DDRB |=1<<0;
 	MCUCR|=1<<PUD;
-	TCCR0A=0b10100011; //выбираем неинверсный режим шим для обоих светодиодов
+	TCCR0A=0b10000001; //выбираем неинверсный режим шим для обоих светодиодов
 	TCCR0B=0b00000001;  //выбираем работу таймера без предделителя тактовой частоты
 	}
 	
@@ -90,10 +90,10 @@ void Led::ledInvert(int changeTime){
 /////////////////////////////////////////////
 
 void Led::setImputValue(byte value){
-	 OCR0A=255-value;
+	 OCR0A=value;//255-value;
 }
 
 byte Led::getImputValue(){
-	return 255-OCR0A;
+	return OCR0A;//255-OCR0A;
 }
 #endif /* PWM_H_ */

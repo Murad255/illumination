@@ -10,6 +10,7 @@
 #ifndef WATCDOG_H_
 #define WATCDOG_H_
 #include <avr/io.h> 
+#include <avr/interrupt.h>
 
 volatile unsigned long int cikle;
 

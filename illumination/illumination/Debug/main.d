@@ -10,8 +10,9 @@ main.d main.o: .././main.cpp \
  d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
+ .././lib/PWM.h .././lib/watcdog.h \
  d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././lib/PWM.h .././lib/watcdog.h .././lib/ExternalInterupt.h
+ .././lib/ExternalInterupt.h
 
 d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -35,10 +36,10 @@ d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\f
 
 d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
-d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
-
 .././lib/PWM.h:
 
 .././lib/watcdog.h:
+
+d:\programs\atmelstudio7\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
 .././lib/ExternalInterupt.h:

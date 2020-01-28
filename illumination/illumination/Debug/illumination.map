@@ -25,11 +25,11 @@ Discarded input sections
  .text._ZN8Interval8intervalEjPFvvEb
                 0x00000000       0x86 main.o
  .text._ZN3Led6ledOffEv
-                0x00000000        0x6 main.o
+                0x00000000        0x4 main.o
  .text._ZN3Led13setImputValueEh
-                0x00000000        0x6 main.o
+                0x00000000        0x4 main.o
  .text._ZN3Led13getImputValueEv
-                0x00000000        0x6 main.o
+                0x00000000        0x4 main.o
  .text._Z9readExIntv
                 0x00000000        0xa main.o
  .text          0x00000000        0x0 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_mulqi3.o)
@@ -248,7 +248,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x390
+.text           0x00000000      0x39c
  *(.vectors)
  .vectors       0x00000000       0x14 D:/PROGRAMS/AtmelStudio7/7.0/Packs/atmel/ATtiny_DFP/1.3.229/gcc/dev/attiny13a/avr25/tiny-stack/crtattiny13a.o
                 0x00000000                __vector_default
@@ -324,50 +324,51 @@ END GROUP
  .text._Z5delaym
                 0x0000008c       0x40 main.o
                 0x0000008c                _Z5delaym
- .text._ZN3Led8PWMbeginEv
+ .text._ZN3LedC2Ev
                 0x000000cc       0x12 main.o
-                0x000000cc                _ZN3Led8PWMbeginEv
+                0x000000cc                _ZN3LedC1Ev
+                0x000000cc                _ZN3LedC2Ev
  .text._ZN3Led5ledOnEh
-                0x000000de       0x24 main.o
+                0x000000de       0x22 main.o
                 0x000000de                _ZN3Led5ledOnEh
  .text._ZN3Led2UpEv
-                0x00000102       0x22 main.o
-                0x00000102                _ZN3Led2UpEv
+                0x00000100       0x20 main.o
+                0x00000100                _ZN3Led2UpEv
  .text._ZN3Led9ledInvertEv
-                0x00000124       0x12 main.o
-                0x00000124                _ZN3Led9ledInvertEv
+                0x00000120       0x10 main.o
+                0x00000120                _ZN3Led9ledInvertEv
  .text._ZN3Led9ledInvertEi
-                0x00000136       0x94 main.o
-                0x00000136                _ZN3Led9ledInvertEi
+                0x00000130       0x92 main.o
+                0x00000130                _ZN3Led9ledInvertEi
  .text.__vector_1
-                0x000001ca       0x22 main.o
-                0x000001ca                __vector_1
+                0x000001c2       0x22 main.o
+                0x000001c2                __vector_1
  .text._Z10ExIntBeginv
-                0x000001ec       0x10 main.o
-                0x000001ec                _Z10ExIntBeginv
+                0x000001e4       0x10 main.o
+                0x000001e4                _Z10ExIntBeginv
  .text._Z14availableExIntv
-                0x000001fc        0xe main.o
-                0x000001fc                _Z14availableExIntv
- .text.main     0x0000020a      0x10a main.o
-                0x0000020a                main
+                0x000001f4        0xe main.o
+                0x000001f4                _Z14availableExIntv
+ .text.main     0x00000202      0x11e main.o
+                0x00000202                main
  .text.libgcc.mul
-                0x00000314       0x12 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_mulqi3.o)
-                0x00000314                __mulqi3
+                0x00000320       0x12 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_mulqi3.o)
+                0x00000320                __mulqi3
  .text.libgcc.div
-                0x00000326       0x18 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_udivmodqi4.o)
-                0x00000326                __udivmodqi4
+                0x00000332       0x18 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_udivmodqi4.o)
+                0x00000332                __udivmodqi4
  .text.libgcc.div
-                0x0000033e       0x26 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_divmodhi4.o)
-                0x0000033e                _div
-                0x0000033e                __divmodhi4
+                0x0000034a       0x26 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_divmodhi4.o)
+                0x0000034a                _div
+                0x0000034a                __divmodhi4
  .text.libgcc.div
-                0x00000364       0x28 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_udivmodhi4.o)
-                0x00000364                __udivmodhi4
-                0x0000038c                . = ALIGN (0x2)
+                0x00000370       0x28 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_udivmodhi4.o)
+                0x00000370                __udivmodhi4
+                0x00000398                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000038c        0x0 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
-                0x0000038c                _exit
-                0x0000038c                exit
+ .fini9         0x00000398        0x0 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
+                0x00000398                _exit
+                0x00000398                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -386,11 +387,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000038c        0x4 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
+ .fini0         0x00000398        0x4 d:/programs/atmelstudio7/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000390                _etext = .
+                0x0000039c                _etext = .
 
-.data           0x00800060        0x0 load address 0x00000390
+.data           0x00800060        0x0 load address 0x0000039c
                 [!provide]                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -412,8 +413,8 @@ END GROUP
                 0x00800061                cikle
  *(COMMON)
                 0x00800065                PROVIDE (__bss_end, .)
-                0x00000390                __data_load_start = LOADADDR (.data)
-                0x00000390                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000039c                __data_load_start = LOADADDR (.data)
+                0x0000039c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800065        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -492,34 +493,34 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xe73
+.debug_info     0x00000000      0xeda
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x2dc D:/PROGRAMS/AtmelStudio7/7.0/Packs/atmel/ATtiny_DFP/1.3.229/gcc/dev/attiny13a/avr25/tiny-stack/crtattiny13a.o
- .debug_info    0x000002dc      0xb97 main.o
+ .debug_info    0x000002dc      0xbfe main.o
 
-.debug_abbrev   0x00000000      0x635
+.debug_abbrev   0x00000000      0x656
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x2b6 D:/PROGRAMS/AtmelStudio7/7.0/Packs/atmel/ATtiny_DFP/1.3.229/gcc/dev/attiny13a/avr25/tiny-stack/crtattiny13a.o
- .debug_abbrev  0x000002b6      0x37f main.o
+ .debug_abbrev  0x000002b6      0x3a0 main.o
 
-.debug_line     0x00000000      0x546
+.debug_line     0x00000000      0x55e
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0xca D:/PROGRAMS/AtmelStudio7/7.0/Packs/atmel/ATtiny_DFP/1.3.229/gcc/dev/attiny13a/avr25/tiny-stack/crtattiny13a.o
- .debug_line    0x000000ca      0x47c main.o
+ .debug_line    0x000000ca      0x494 main.o
 
 .debug_frame    0x00000000      0x1c4
  *(.debug_frame)
  .debug_frame   0x00000000      0x1c4 main.o
 
-.debug_str      0x00000000      0x46d
+.debug_str      0x00000000      0x476
  *(.debug_str)
  .debug_str     0x00000000      0x100 D:/PROGRAMS/AtmelStudio7/7.0/Packs/atmel/ATtiny_DFP/1.3.229/gcc/dev/attiny13a/avr25/tiny-stack/crtattiny13a.o
- .debug_str     0x00000100      0x36d main.o
-                                0x3a1 (size before relaxing)
+ .debug_str     0x00000100      0x376 main.o
+                                0x3aa (size before relaxing)
 
-.debug_loc      0x00000000      0x865
+.debug_loc      0x00000000      0x732
  *(.debug_loc)
- .debug_loc     0x00000000      0x865 main.o
+ .debug_loc     0x00000000      0x732 main.o
 
 .debug_macinfo
  *(.debug_macinfo)

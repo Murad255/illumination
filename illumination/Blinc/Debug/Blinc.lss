@@ -1,0 +1,152 @@
+
+Blinc.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000088  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000000dc  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000000dc  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000010c  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000020  00000000  00000000  00000148  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000004c8  00000000  00000000  00000168  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000003c4  00000000  00000000  00000630  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000238  00000000  00000000  000009f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000024  00000000  00000000  00000c2c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000002c7  00000000  00000000  00000c50  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000011d  00000000  00000000  00000f17  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000010  00000000  00000000  00001034  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	09 c0       	rjmp	.+18     	; 0x14 <__ctors_end>
+   2:	0e c0       	rjmp	.+28     	; 0x20 <__bad_interrupt>
+   4:	0d c0       	rjmp	.+26     	; 0x20 <__bad_interrupt>
+   6:	0c c0       	rjmp	.+24     	; 0x20 <__bad_interrupt>
+   8:	0b c0       	rjmp	.+22     	; 0x20 <__bad_interrupt>
+   a:	0a c0       	rjmp	.+20     	; 0x20 <__bad_interrupt>
+   c:	09 c0       	rjmp	.+18     	; 0x20 <__bad_interrupt>
+   e:	08 c0       	rjmp	.+16     	; 0x20 <__bad_interrupt>
+  10:	07 c0       	rjmp	.+14     	; 0x20 <__bad_interrupt>
+  12:	06 c0       	rjmp	.+12     	; 0x20 <__bad_interrupt>
+
+00000014 <__ctors_end>:
+  14:	11 24       	eor	r1, r1
+  16:	1f be       	out	0x3f, r1	; 63
+  18:	cf e9       	ldi	r28, 0x9F	; 159
+  1a:	cd bf       	out	0x3d, r28	; 61
+  1c:	02 d0       	rcall	.+4      	; 0x22 <main>
+  1e:	32 c0       	rjmp	.+100    	; 0x84 <_exit>
+
+00000020 <__bad_interrupt>:
+  20:	ef cf       	rjmp	.-34     	; 0x0 <__vectors>
+
+00000022 <main>:
+#include <util/delay.h>
+
+int main(void)
+{
+    /* Replace with your application code */
+		DDRB |=1<<0;
+  22:	b8 9a       	sbi	0x17, 0	; 23
+		MCUCR|=1<<PUD;
+  24:	85 b7       	in	r24, 0x35	; 53
+  26:	80 64       	ori	r24, 0x40	; 64
+  28:	85 bf       	out	0x35, r24	; 53
+		TCCR0A=0b10000001; //выбираем неинверсный режим шим для обоих светодиодов
+  2a:	81 e8       	ldi	r24, 0x81	; 129
+  2c:	8f bd       	out	0x2f, r24	; 47
+		TCCR0B=0b00000001;  //выбираем работу таймера без предделителя тактовой частоты
+  2e:	81 e0       	ldi	r24, 0x01	; 1
+  30:	83 bf       	out	0x33, r24	; 51
+		
+    while (1) 
+    {
+		for(int n=0;n<256;n++){
+  32:	80 e0       	ldi	r24, 0x00	; 0
+  34:	90 e0       	ldi	r25, 0x00	; 0
+			
+			OCR0A=n;
+  36:	86 bf       	out	0x36, r24	; 54
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  38:	e3 e9       	ldi	r30, 0x93	; 147
+  3a:	f1 e1       	ldi	r31, 0x11	; 17
+  3c:	31 97       	sbiw	r30, 0x01	; 1
+  3e:	f1 f7       	brne	.-4      	; 0x3c <main+0x1a>
+  40:	00 c0       	rjmp	.+0      	; 0x42 <__SREG__+0x3>
+  42:	00 00       	nop
+		TCCR0A=0b10000001; //выбираем неинверсный режим шим для обоих светодиодов
+		TCCR0B=0b00000001;  //выбираем работу таймера без предделителя тактовой частоты
+		
+    while (1) 
+    {
+		for(int n=0;n<256;n++){
+  44:	01 96       	adiw	r24, 0x01	; 1
+  46:	81 15       	cp	r24, r1
+  48:	f1 e0       	ldi	r31, 0x01	; 1
+  4a:	9f 07       	cpc	r25, r31
+  4c:	a1 f7       	brne	.-24     	; 0x36 <main+0x14>
+  4e:	87 ec       	ldi	r24, 0xC7	; 199
+  50:	9f ea       	ldi	r25, 0xAF	; 175
+  52:	01 97       	sbiw	r24, 0x01	; 1
+  54:	f1 f7       	brne	.-4      	; 0x52 <__SREG__+0x13>
+  56:	00 c0       	rjmp	.+0      	; 0x58 <__SREG__+0x19>
+  58:	00 00       	nop
+			
+			OCR0A=n;
+			_delay_ms(15);
+		}
+		_delay_ms(150);
+		for(int n=255;n>=0;n--){
+  5a:	8f ef       	ldi	r24, 0xFF	; 255
+  5c:	90 e0       	ldi	r25, 0x00	; 0
+			
+			OCR0A=n;
+  5e:	86 bf       	out	0x36, r24	; 54
+  60:	e3 e9       	ldi	r30, 0x93	; 147
+  62:	f1 e1       	ldi	r31, 0x11	; 17
+  64:	31 97       	sbiw	r30, 0x01	; 1
+  66:	f1 f7       	brne	.-4      	; 0x64 <__SREG__+0x25>
+  68:	00 c0       	rjmp	.+0      	; 0x6a <__SREG__+0x2b>
+  6a:	00 00       	nop
+			
+			OCR0A=n;
+			_delay_ms(15);
+		}
+		_delay_ms(150);
+		for(int n=255;n>=0;n--){
+  6c:	01 97       	sbiw	r24, 0x01	; 1
+  6e:	b8 f7       	brcc	.-18     	; 0x5e <__SREG__+0x1f>
+  70:	2f eb       	ldi	r18, 0xBF	; 191
+  72:	84 ed       	ldi	r24, 0xD4	; 212
+  74:	91 e0       	ldi	r25, 0x01	; 1
+  76:	21 50       	subi	r18, 0x01	; 1
+  78:	80 40       	sbci	r24, 0x00	; 0
+  7a:	90 40       	sbci	r25, 0x00	; 0
+  7c:	e1 f7       	brne	.-8      	; 0x76 <__SREG__+0x37>
+  7e:	00 c0       	rjmp	.+0      	; 0x80 <__SREG__+0x41>
+  80:	00 00       	nop
+  82:	d7 cf       	rjmp	.-82     	; 0x32 <main+0x10>
+
+00000084 <_exit>:
+  84:	f8 94       	cli
+
+00000086 <__stop_program>:
+  86:	ff cf       	rjmp	.-2      	; 0x86 <__stop_program>

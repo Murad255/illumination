@@ -8,9 +8,12 @@
  */ 
 #pragma once
 #include <avr/io.h>
+#include <avr/interrupt.h>
 typedef unsigned char byte;
-#define DDR DDRB
-#define PORT PORTB
+#if !defined(ATMEGA) && !defined(ATTINY)
+	#error "Don't defined controller family! Will deifine family (ATMEGA or ATTINY) before add this library."
+#endif
+
 volatile byte flag =0;
 
 byte readExInt();
@@ -23,15 +26,22 @@ ISR(INT0_vect)
 }
 
 //####################################################################
-	void ExIntBegin(){
-		DDR &=~(1<<2);
-		PORT |=(1<<2);
-		//EICRA 
-		MCUCR=(1<<ISC01) | (1<<ISC00);
-		//EIMSK 
-		GIMSK= (1<<INT0);
-		sei();
-	}
+		void ExIntBegin(){
+			#ifdef ATMEGA
+			DDRD&=~(1<<2);
+			PORTD |=(1<<2);
+			EICRA =(1<<ISC01) | (1<<ISC00);
+			EIMSK = (1<<INT0);
+			#endif
+			
+			#ifdef ATTINY
+			DDRB &=~(1<<2);
+			PORTB |=(1<<2);
+			MCUCR=(1<<ISC01) | (1<<ISC00);
+			GIMSK= (1<<INT0);
+			#endif
+			sei();
+		}
 	byte readExInt(){
 		byte n=flag;
 		flag =0;
